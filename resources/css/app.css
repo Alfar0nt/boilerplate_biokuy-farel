@@ -1,0 +1,329 @@
+@import 'tailwindcss';
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+@source "../**/*.blade.php";
+@source "../**/*.js";
+
+/* ============================================================
+   DESIGN TOKENS — CSS Custom Properties
+   ============================================================ */
+@theme {
+    /* Typography */
+    --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+
+    /* Brand Colors */
+    --color-brand-primary: oklch(0.65 0.18 165);
+    --color-brand-primary-hover: oklch(0.58 0.18 165);
+    --color-brand-primary-light: oklch(0.92 0.05 165);
+    --color-brand-secondary: oklch(0.55 0.15 240);
+    --color-brand-secondary-hover: oklch(0.48 0.15 240);
+    --color-brand-secondary-light: oklch(0.92 0.05 240);
+
+    /* Surface Colors */
+    --color-surface-base: oklch(0.98 0 0);
+    --color-surface-elevated: oklch(1 0 0);
+    --color-surface-muted: oklch(0.96 0 0);
+    --color-surface-dark: oklch(0.14 0 0);
+    --color-surface-sidebar: oklch(0.12 0.02 240);
+
+    /* Text Colors */
+    --color-text-primary: oklch(0.15 0 0);
+    --color-text-secondary: oklch(0.45 0 0);
+    --color-text-muted: oklch(0.65 0 0);
+    --color-text-inverse: oklch(0.98 0 0);
+    --color-text-brand: oklch(0.65 0.18 165);
+
+    /* Border Colors */
+    --color-border: oklch(0.90 0 0);
+    --color-border-focus: oklch(0.65 0.18 165);
+
+    /* Status Colors */
+    --color-success: oklch(0.65 0.18 145);
+    --color-warning: oklch(0.75 0.15 75);
+    --color-danger: oklch(0.60 0.20 25);
+    --color-info: oklch(0.60 0.15 240);
+
+    /* Radius */
+    --radius-card: 1.25rem;
+    --radius-btn: 0.75rem;
+    --radius-input: 0.625rem;
+    --radius-badge: 0.5rem;
+    --radius-full: 9999px;
+
+    /* Shadows */
+    --shadow-card: 0 4px 24px oklch(0 0 0 / 0.06);
+    --shadow-elevated: 0 8px 40px oklch(0 0 0 / 0.10);
+    --shadow-input: 0 1px 3px oklch(0 0 0 / 0.04);
+    --shadow-sidebar: 4px 0 24px oklch(0 0 0 / 0.08);
+
+    /* Sidebar */
+    --sidebar-width: 260px;
+    --sidebar-collapsed-width: 72px;
+}
+
+/* ============================================================
+   UTILITY CLASSES — @layer utilities (Tailwind v4)
+   ============================================================ */
+@utility card {
+    background-color: var(--color-surface-elevated);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-card);
+    box-shadow: var(--shadow-card);
+    padding: 1.5rem;
+}
+
+@utility card-hover {
+    background-color: var(--color-surface-elevated);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-card);
+    box-shadow: var(--shadow-card);
+    padding: 1.5rem;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+    &:hover {
+        box-shadow: var(--shadow-elevated);
+        transform: translateY(-2px);
+        border-color: var(--color-brand-primary-light);
+    }
+}
+
+@utility btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    background-color: var(--color-brand-primary);
+    color: white;
+    border: none;
+    border-radius: var(--radius-btn);
+    padding: 0.625rem 1.5rem;
+    font-weight: 600;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    text-decoration: none;
+
+    &:hover {
+        background-color: var(--color-brand-primary-hover);
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px oklch(0.65 0.18 165 / 0.3);
+    }
+
+    &:active {
+        transform: translateY(0);
+    }
+
+    &:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+        transform: none;
+    }
+}
+
+@utility btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    background-color: transparent;
+    color: var(--color-brand-primary);
+    border: 2px solid var(--color-brand-primary);
+    border-radius: var(--radius-btn);
+    padding: 0.5rem 1.5rem;
+    font-weight: 600;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    text-decoration: none;
+
+    &:hover {
+        background-color: var(--color-brand-primary);
+        color: white;
+        transform: translateY(-1px);
+    }
+
+    &:active {
+        transform: translateY(0);
+    }
+}
+
+@utility btn-ghost {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    background-color: transparent;
+    color: var(--color-text-secondary);
+    border: none;
+    border-radius: var(--radius-btn);
+    padding: 0.5rem 1rem;
+    font-weight: 500;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    text-decoration: none;
+
+    &:hover {
+        background-color: var(--color-surface-muted);
+        color: var(--color-text-primary);
+    }
+}
+
+@utility input-field {
+    width: 100%;
+    background-color: var(--color-surface-elevated);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-input);
+    padding: 0.625rem 0.875rem;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    color: var(--color-text-primary);
+    box-shadow: var(--shadow-input);
+    transition: all 0.2s ease;
+    outline: none;
+
+    &::placeholder {
+        color: var(--color-text-muted);
+    }
+
+    &:focus {
+        border-color: var(--color-brand-primary);
+        box-shadow: 0 0 0 3px oklch(0.65 0.18 165 / 0.15);
+    }
+
+    &:disabled {
+        background-color: var(--color-surface-muted);
+        opacity: 0.7;
+        cursor: not-allowed;
+    }
+}
+
+@utility badge-free {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0.25rem 0.75rem;
+    border-radius: var(--radius-badge);
+    font-size: 0.75rem;
+    font-weight: 600;
+    line-height: 1rem;
+    background-color: oklch(0.93 0.01 260);
+    color: oklch(0.40 0.03 260);
+    border: 1px solid oklch(0.85 0.02 260);
+}
+
+@utility badge-student {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0.25rem 0.75rem;
+    border-radius: var(--radius-badge);
+    font-size: 0.75rem;
+    font-weight: 600;
+    line-height: 1rem;
+    background-color: oklch(0.93 0.05 240);
+    color: oklch(0.45 0.15 240);
+    border: 1px solid oklch(0.85 0.08 240);
+}
+
+@utility badge-pro {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0.25rem 0.75rem;
+    border-radius: var(--radius-badge);
+    font-size: 0.75rem;
+    font-weight: 700;
+    line-height: 1rem;
+    background: linear-gradient(135deg, oklch(0.65 0.18 165), oklch(0.55 0.15 200));
+    color: white;
+    border: none;
+    box-shadow: 0 2px 8px oklch(0.65 0.18 165 / 0.25);
+}
+
+/* ============================================================
+   BASE STYLES
+   ============================================================ */
+@layer base {
+    * {
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+
+    ::selection {
+        background-color: oklch(0.65 0.18 165 / 0.2);
+        color: var(--color-text-primary);
+    }
+
+    body {
+        background-color: var(--color-surface-base);
+        color: var(--color-text-primary);
+    }
+
+    /* Scrollbar Styling */
+    ::-webkit-scrollbar {
+        width: 6px;
+        height: 6px;
+    }
+
+    ::-webkit-scrollbar-track {
+        background: transparent;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background: oklch(0.75 0 0);
+        border-radius: 3px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+        background: oklch(0.60 0 0);
+    }
+}
+
+/* ============================================================
+   ANIMATIONS
+   ============================================================ */
+@keyframes fade-in {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slide-in-left {
+    from { opacity: 0; transform: translateX(-16px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes slide-in-right {
+    from { opacity: 0; transform: translateX(16px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes scale-in {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+}
+
+@utility animate-fade-in {
+    animation: fade-in 0.4s cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+
+@utility animate-slide-in-left {
+    animation: slide-in-left 0.3s cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+
+@utility animate-slide-in-right {
+    animation: slide-in-right 0.3s cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+
+@utility animate-scale-in {
+    animation: scale-in 0.2s cubic-bezier(0.4, 0, 0.2, 1) both;
+}
