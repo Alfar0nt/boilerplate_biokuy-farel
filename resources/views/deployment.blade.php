@@ -35,7 +35,7 @@
                         🖥️ AWS EC2 – Web Server
                     </h2>
                     <p class="text-gray-200 mb-2">
-                        The application runs on an Ubuntu 22.04 LTS EC2 instance behind a security group that only allows
+                        The application runs on a Debian 13 LTS EC2 instance behind a security group that only allows
                         HTTP/HTTPS (80/443) from Cloudflare IPs.
                     </p>
                     <ul class="list-disc list-inside space-y-1 text-gray-300">
@@ -52,7 +52,7 @@
                         📦 AWS RDS – Database
                     </h2>
                     <p class="text-gray-200 mb-2">
-                        Managed MySQL 8.0 instance, isolated in a private subnet.
+                        Managed MySQL 8.4 instance, isolated in a private subnet.
                     </p>
                     <ul class="list-disc list-inside space-y-1 text-gray-300">
                         <li>Endpoint stored in <code>.env</code> as <code>DB_HOST</code></li>
