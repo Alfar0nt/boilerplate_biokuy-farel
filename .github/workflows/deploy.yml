@@ -18,11 +18,14 @@ jobs:
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
             # 1. Masuk ke direktori proyek
+            set -e
+
             cd /var/www/biokuy
             
             # 2. Tarik kode terbaru dari GitHub
-            git pull origin main
-            
+            git fetch --all
+            git reset --hard origin/main
+                        
             # 3. Update dependensi PHP (Laravel)
             composer install --no-interaction --prefer-dist --optimize-autoloader
             
