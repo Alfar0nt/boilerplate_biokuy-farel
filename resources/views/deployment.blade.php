@@ -14,7 +14,7 @@
  */
 ?>
 <x-guest-layout>
-    <x-slot:name="title">Deployment Documentation</x-slot>
+    <x-slot name="title">Deployment Documentation</x-slot>
     <div class="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-700 text-white p-8">
         <div class="max-w-5xl mx-auto space-y-12">
             <!-- Header -->
