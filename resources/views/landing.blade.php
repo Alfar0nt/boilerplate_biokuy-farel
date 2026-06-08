@@ -1,11 +1,11 @@
 <x-guest-layout>
-    <x-slot:title>BioKuy — Satu Link untuk Semua</x-slot:title>
+    <x-slot:title>BioKuy Punya Farel — Satu Link untuk Semua</x-slot:title>
 
     <div class="w-full max-w-5xl mx-auto px-4 py-8">
         <div class="text-center max-w-2xl mx-auto animate-fade-in mb-16">
             <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-primary/10 text-brand-primary text-sm font-medium mb-6">
                 <span class="w-2 h-2 rounded-full bg-brand-primary animate-pulse"></span>
-                Link-in-Bio untuk semua orang
+                Link-in-Bio untuk semua orang, yang dimiliki oleh Farel Keren 01
             </div>
             <h1 class="text-4xl sm:text-5xl font-extrabold text-text-primary leading-tight mb-4">
                 Satu Link.<br>
