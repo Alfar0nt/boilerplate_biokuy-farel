@@ -23,6 +23,9 @@
                 <a href="{{ route('login') }}" class="btn-ghost text-base px-6 py-3">
                     Sudah punya akun? Login
                 </a>
+                <a href="{{ route('deployment') }}" class="btn-secondary text-base px-6 py-3 ml-2">
+                    Deployement yang saya gunakan
+                </a>
             </div>
         </div>
 

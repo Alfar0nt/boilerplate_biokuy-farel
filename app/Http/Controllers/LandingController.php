@@ -13,4 +13,12 @@ class LandingController extends Controller
     {
         return view('landing');
     }
+
+    /**
+     * Show deployment documentation page.
+     */
+    public function deployment(): View
+    {
+        return view('deployment');
+    }
 }

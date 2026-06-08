@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Route;
 // =========================================================
 
 Route::get('/', [LandingController::class, 'index'])->name('landing');
+Route::get('/deployment', [LandingController::class, 'deployment'])->name('deployment');
 Route::get('/links/{link}/go', [PublicProfileController::class, 'redirect'])->name('links.go');
 
 // =========================================================
