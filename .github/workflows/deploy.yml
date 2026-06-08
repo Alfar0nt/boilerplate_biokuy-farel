@@ -1,0 +1,40 @@
+name: Deploy Laravel to AWS EC2
+
+on:
+  push:
+    branches:
+      - main # Workflow ini berjalan setiap ada push ke branch main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Eksekusi script deployment via SSH
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USERNAME }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          script: |
+            # 1. Masuk ke direktori proyek
+            cd /var/www/biokuy
+            
+            # 2. Tarik kode terbaru dari GitHub
+            git pull origin main
+            
+            # 3. Update dependensi PHP (Laravel)
+            composer install --no-interaction --prefer-dist --optimize-autoloader
+            
+            # 4. Update dependensi Node.js & kompilasi aset Vite/Tailwind
+            npm install
+            npm run build
+            
+            # 5. Jalankan migrasi database (jika ada perubahan/tabel baru)
+            php artisan migrate --force
+            
+            # 6. Bersihkan dan bangun ulang cache Laravel agar web lebih cepat
+            php artisan optimize:clear
+            php artisan config:cache
+            php artisan route:cache
+            php artisan view:cache
