@@ -100,6 +100,12 @@
                     </ul>
                 </div>
             </div>
+{{-- Deployment author --}}
+<div class="text-center mt-6 animate-fade-in">
+    <p class="text-gray-300">
+        Deployed by <a href="https://www.dhiar.my.id/links" class="text-indigo-400 hover:underline">dhiar harianto</a>
+    </p>
+</div>
 
             <!-- Footer navigation -->
             <div class="text-center mt-8 animate-fade-in">
